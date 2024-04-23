@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string("gender", 20)->nullable();
             $table->string("phone_number", 20)->nullable();
             $table->boolean("status")->nullable(false)->default(true);
-            $table->string("photo_image")->nullable();
+            $table->string("photo_image", 100)->nullable();
             $table->timestamps();
         });
     }
