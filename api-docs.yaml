@@ -1,0 +1,353 @@
+openapi: "3.0.2"
+info:
+  title: CAN Backend Test
+  version: "1.0"
+
+servers:
+  - url: http://localhost:8000/api
+paths:
+  /auth/login:
+    get:
+      tags:
+        - "auth"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: example@gmail.com
+                password:
+                  type: string
+                  example: rahasia123
+
+      responses:
+        "200":
+          description: OK
+  /auth/logout:
+    get:
+      tags:
+        - "auth"
+      responses:
+        "200":
+          description: OK
+  /user:
+    post:
+      tags:
+        - "user"
+      summary: Register New User
+      description: Register New User
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#components/schemas/UserSchema"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/UserSchema"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      email:
+                        type: array
+                        items:
+                          type: string
+                        example:
+                          - "The email has already been taken."
+
+    get:
+      security:
+        - authSecurity: []
+      tags:
+        - "user"
+      summary: get user login data
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/UserSchema"
+        "401":
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                $ref : "#/components/schemas/UnauthorizedSchema"
+  /schedule:
+    get:
+      summary: get all bus Schedule
+      security:
+        - authSecurity: []
+      tags:
+        - "Schedule"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/ScheduleSchema"
+        "401":
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                $ref : "#/components/schemas/UnauthorizedSchema"
+
+  /ticket:
+    post:
+      summary: create or buy ticket
+      security:
+        - authSecurity: []
+      tags:
+        - "Ticket"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                schedule_id:
+                  type: integer
+                  example: 1
+                description:
+                  type: string
+                  example: "tolong kasih posisi yang nyaman"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  buyyer_name:
+                    type: string
+                    example: oukenze
+                  buyyer_email:
+                    type: string
+                    format: email
+                    example: oukenze@gmail.com
+                  schedule_id:
+                    $ref: "#/components/schemas/ScheduleSchema"
+                  description:
+                    type: string
+                    example: "tolong kasih posisi yang nyaman"
+                  buy_at:
+                    type: string
+                    format: date-time
+                    example: "2024-04-24T09:24:48.000000Z"
+
+        "401":
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                $ref : "#/components/schemas/UnauthorizedSchema"
+    get:
+      summary: get all ticket by user
+      security:
+        - authSecurity: []
+      tags:
+        - "Ticket"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  buyyer_name:
+                    type: string
+                    example: oukenze
+                  buyyer_email:
+                    type: string
+                    format: email
+                    example: oukenze@gmail.com
+                  schedule_id:
+                    $ref: "#/components/schemas/ScheduleSchema"
+                  description:
+                    type: string
+                    example: "tolong kasih posisi yang nyaman"
+                  buy_at:
+                    type: string
+                    format: date-time
+                    example: "2024-04-24T09:24:48.000000Z"
+        "401":
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedSchema"
+
+  /ticket/{id}:
+    get:
+      summary: get ticket by id
+      security:
+        - authSecurity: []
+      tags:
+        - "Ticket"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  buyyer_name:
+                    type: string
+                    example: oukenze
+                  buyyer_email:
+                    type: string
+                    format: email
+                    example: oukenze@gmail.com
+                  schedule_id:
+                    $ref: "#/components/schemas/ScheduleSchema"
+                  description:
+                    type: string
+                    example: "tolong kasih posisi yang nyaman"
+                  buy_at:
+                    type: string
+                    format: date-time
+                    example: "2024-04-24T09:24:48.000000Z"
+        "401":
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                $ref : "#/components/schemas/UnauthorizedSchema"
+components:
+  securitySchemes:
+    authSecurity:
+      type: apiKey
+      in: header
+      name: Authorization
+  schemas:
+    UserSchema:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 2
+            name:
+              type: string
+              example: oukenze
+            email:
+              type: string
+              example: oukenze1@gmail.com
+            no_ktp:
+              type: string
+              example: "1234567890123456"
+            birth_date:
+              type: string
+              format: date
+              example: "2002-01-01"
+            gender:
+              type: string
+              example: Male
+            address:
+              type: string
+              example: Jalan lokanta
+            phone_number:
+              type: string
+              example: "08571284908"
+            created_at:
+              type: string
+              format: date-time
+              example: "2024-04-24T11:01:42.000000Z"
+            updated_at:
+              type: string
+              format: date-time
+              example: "2024-04-24T11:01:42.000000Z"
+    ScheduleSchema:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 1
+              bus_type:
+                type: string
+                example: Hino
+              bus_plat:
+                type: string
+                example: "B 1234 AB"
+              first_city:
+                type: string
+                example: Jakarta
+              destination_city:
+                type: string
+                example: Surabaya
+              price:
+                type: integer
+                example: 100000
+              driver_id:
+                type: integer
+                example: 1
+              driver_name:
+                type: string
+                example: Employee 1
+              driver_email:
+                type: string
+                format: email
+                example: employee1@example.com
+              driver_phone_number:
+                type: string
+                example: "123456789"
+              driver_assist_id:
+                type: integer
+                example: 2
+              driver_assist_name:
+                type: string
+                example: Employee 2
+              driver_assist_email:
+                type: string
+                format: email
+                example: employee2@example.com
+              driver_assist_phone_number:
+                type: string
+                example: "987654321"
+              start_at:
+                type: string
+                format: date-time
+                example: "2024-04-24 08:00:00"
+    UnauthorizedSchema:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            message:
+              type: array
+              items:
+                type: string
+                example : Unauthorized
+
+
+                
