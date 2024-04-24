@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Schedule extends Model
-{
+class Schedule extends Model {
     protected $table = "schedules";
     protected $primaryKey = "id";
     protected $typeKey = "int";
@@ -24,23 +23,23 @@ class Schedule extends Model
         'start_at'
     ];
 
-    public function ticket() : HasMany {
+    public function ticket(): HasMany {
         return $this->hasMany(ticket::class, "schedule_id", "id");
     }
 
-    public function relation() : BelongsTo{
+    public function relation(): BelongsTo {
         return $this->belongsTo(relation::class, "relation_id", "id");
     }
 
-    public function driver() : BelongsTo{
-        return $this->belongsTo(employee::class, "driver_id", "id");
+    public function driver(): BelongsTo {
+        return $this->belongsTo(Employee::class, "driver_id", "id");
     }
 
-    public function driverAssistance() : BelongsTo{
-        return $this->belongsTo(employee::class, "driver_assist_id", "id");
+    public function driverAssistance(): BelongsTo {
+        return $this->belongsTo(Employee::class, "driver_assist_id", "id");
     }
 
-    public function bus(): BelongsTo{
-        return $this-> belongsTo(bus::class, "bus_id", "id");
+    public function bus(): BelongsTo {
+        return $this->belongsTo(bus::class, "bus_id", "id");
     }
 }
