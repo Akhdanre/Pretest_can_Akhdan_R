@@ -14,6 +14,19 @@ class User extends Model {
     public $timestamps = true;
     public $incrementing = true;
 
+    protected $fillable = [
+        'email',
+        'password',
+        'no_ktp',
+        'name',
+        'birth_date',
+        'gender',
+        'address',
+        'phone_number',
+        'profile_image',
+        'token'
+    ];
+
     public function tickets(): HasMany {
         return $this->hasMany(Ticket::class, "user_id", "id");
     }
