@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("email", 100)->nullable(false)->unique("employee_email_unique");
             $table->string("name", 100)->nullable(false);
+            $table->unsignedBigInteger("role_id")->nullable(false);
             $table->date("birth_date")->nullable();
             $table->string("address", 100)->nullable();
             $table->string("gender", 20)->nullable();
@@ -22,6 +23,8 @@ return new class extends Migration
             $table->boolean("status")->nullable(false)->default(true);
             $table->string("photo_image", 100)->nullable();
             $table->timestamps();
+
+            $table->foreign("role_id")->references("id")->on("roles");
         });
     }
 

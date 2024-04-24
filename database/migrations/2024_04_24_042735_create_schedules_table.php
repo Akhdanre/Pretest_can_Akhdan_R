@@ -1,6 +1,5 @@
 <?php
 
-use Brick\Math\BigInteger;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -25,6 +24,7 @@ return new class extends Migration
             $table->foreign("driver_id")->references("id")->on("employees");
             $table->foreign("driver_assist_id")->references("id")->on("employees");
             $table->foreign("bus_id")->references("id")->on("buses");
+			
         });
     }
 

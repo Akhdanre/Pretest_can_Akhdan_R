@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class relation extends Model
@@ -14,11 +15,15 @@ class relation extends Model
     public $timestamps = true;
     public $incrementing = true;
 
-    public function cityFrom() : HasOne {
-        return $this->hasOne(city::class, "from_id", "id");
+    public function cityFrom() : BelongsTo {
+        return $this->belongsTo(city::class, "from_id", "id");
     }
 
-    public function cityDestination() : HasOne {
-        return $this->hasOne(city::class, "destination_id", "id");
+    public function cityDestination() : BelongsTo {
+        return $this->belongsTo(city::class, "destination_id", "id");
+    }
+
+    public function schedule() : HasOne {
+        return $this->hasOne(Schedule::class, "relation_id", "id");
     }
 }
