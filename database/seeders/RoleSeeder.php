@@ -2,12 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\Role;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\role;
 use Illuminate\Database\Seeder;
 
 class RoleSeeder extends Seeder
 {
+    public $priority = 2;
     /**
      * Run the database seeds.
      */

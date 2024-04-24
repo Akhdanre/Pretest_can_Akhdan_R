@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Role extends Model {
+class role extends Model {
     protected $table = "roles";
     protected $primaryKey = "id";
     protected $typeKey = "int";
+    public $timestamps = false;
     public $incrementing = true;
 
     protected $fillable = [

@@ -17,7 +17,7 @@ class bus extends Model
     protected $fillable = [
         'plat_no',
         'type',
-        'capacity',
+        'capasity',
     ];
 
     public function schedule() : HasOne {

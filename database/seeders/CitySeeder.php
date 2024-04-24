@@ -8,6 +8,7 @@ use Illuminate\Database\Seeder;
 
 class CitySeeder extends Seeder
 {
+    public $priority = 3;
     /**
      * Run the database seeds.
      */

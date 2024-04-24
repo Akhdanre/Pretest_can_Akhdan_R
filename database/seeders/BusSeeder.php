@@ -8,6 +8,7 @@ use Illuminate\Database\Seeder;
 
 class BusSeeder extends Seeder
 {
+    public $priority = 1;
     /**
      * Run the database seeds.
      */
@@ -16,13 +17,13 @@ class BusSeeder extends Seeder
         bus::create([
             'plat_no' => 'B 1234 AB',
             'type' => 'Hino',
-            'capacity' => 45,
+            'capasity' => 45,
         ]);
 
         bus::create([
             'plat_no' => 'B 5678 CD',
             'type' => 'Mercedes',
-            'capacity' => 60,
+            'capasity' => 60,
         ]);
     }
 }
