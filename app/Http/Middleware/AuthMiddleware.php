@@ -15,8 +15,9 @@ class AuthMiddleware {
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle(Request $request, Closure $next): Response {
-        $token = $request->header("Authorization");
+        $token = $request->header('Authorization');
         $authenticate = true;
+
         if (!$token) {
             $authenticate = false;
         }
@@ -39,5 +40,6 @@ class AuthMiddleware {
                 ]
             ])->setStatusCode(401);
         }
+    
     }
 }

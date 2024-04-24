@@ -3,10 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\Authenticatable;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use PHPUnit\Framework\Attributes\Ticket;
 
 class User extends Model implements Authenticatable {
     protected $table = "users";
@@ -32,33 +30,33 @@ class User extends Model implements Authenticatable {
         return $this->hasMany(Ticket::class, "user_id", "id");
     }
 
-
-    public function getAuthIdentifierName() {
+    public function getAuthIdentifierName()
+    {
         return 'email';
     }
 
-
-    public function getAuthIdentifier() {
+    public function getAuthIdentifier()
+    {
         return $this->email;
     }
 
-
-    public function getAuthPassword() {
+    public function getAuthPassword()
+    {
         return $this->password;
     }
 
-
-    public function getRememberToken() {
+    public function getRememberToken()
+    {
         return $this->token;
     }
 
-
-    public function setRememberToken($value) {
+    public function setRememberToken($value)
+    {
         $this->token = $value;
     }
 
-
-    public function getRememberTokenName() {
+    public function getRememberTokenName()
+    {
         return 'token';
     }
 }

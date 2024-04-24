@@ -24,6 +24,6 @@ use Illuminate\Support\Facades\Route;
 Route::post('/user', [UserController::class, 'register']);
 Route::post('/auth/login', [AuthController::class, 'login']);
 
-// Route::middleware(AuthMiddleware::class)->group(function(){
-//     Route::get('/user', [UserController::class, 'get']);
-// });
+Route::middleware(AuthMiddleware::class)->group(function(){
+    Route::get('/user', [UserController::class, 'get']);
+});
