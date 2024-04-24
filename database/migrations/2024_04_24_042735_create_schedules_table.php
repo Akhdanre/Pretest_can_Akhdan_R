@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger("driver_assist_id")->nullable(false);
             $table->unsignedBigInteger("bus_id")->nullable(false);
             $table->dateTime("start_at")->nullable(false);
+            $table->integer("seat_available")->nullable(false)->default(40);
             $table->timestamps();
 
             $table->foreign("relation_id")->references("id")->on("relations");

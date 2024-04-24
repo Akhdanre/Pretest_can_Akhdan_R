@@ -20,7 +20,8 @@ class Schedule extends Model {
         'driver_id',
         'driver_assist_id',
         'bus_id',
-        'start_at'
+        'start_at', 
+        'seat_available'
     ];
 
     public function ticket(): HasMany {

@@ -20,7 +20,7 @@ class ticket extends Model {
     ];
 
     public function user(): BelongsTo {
-        return $this->belongTo(User::class, "user_id", "id");
+        return $this->belongsTo(User::class, "user_id", "id");
     }
 
     public function schedule(): BelongsTo {
