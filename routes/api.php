@@ -30,4 +30,6 @@ Route::middleware(AuthMiddleware::class)->group(function(){
     Route::get('/user', [UserController::class, 'get']);
     Route::get('/schedule', [ScheduleController::class, 'get']);
     Route::post('/ticket', [TicketController::class, 'create']);
+    Route::get('/ticket', [TicketController::class, 'index']);
+    Route::get('/ticket/{id}', [TicketController::class, 'show']);
 });

@@ -7,6 +7,7 @@ use App\Http\Resources\TicketResource;
 use App\Models\Schedule;
 use App\Models\ticket;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class TicketController extends Controller {
@@ -43,4 +44,16 @@ class TicketController extends Controller {
         );
         return new TicketResource($ticket);
     }
+
+
+    public function index(Request $request) {
+        $user = Auth::user();
+        $ticket = ticket::where('id', $user->id)->get();
+        return TicketResource::collection($ticket);
+    }
+
+    public function show(Request $request, $id) {
+        $ticket = Ticket::findOrFail($id);
+        return new TicketResource($ticket);
+    }    
 }
