@@ -14,6 +14,12 @@ class bus extends Model
     public $timestamps = true;
     public $incrementing = true;
 
+    protected $fillable = [
+        'plat_no',
+        'type',
+        'capacity',
+    ];
+
     public function schedule() : HasOne {
         return $this->hasOne(schedule::class , "bus_id", "id");
     }

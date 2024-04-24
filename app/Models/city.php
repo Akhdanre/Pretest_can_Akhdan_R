@@ -14,6 +14,10 @@ class city extends Model
     // public $timestamps = false;
     public $incrementing = true;
 
+    protected $fillable = [
+        "name"
+    ];
+
     public function fromRelation() : HasMany {
         return $this->hasMany(relation::class, "from_id", "id");
     }

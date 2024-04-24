@@ -16,6 +16,18 @@ class Schedule extends Model
     public $timestamps = true;
     public $incrementing = true;
 
+    protected $fillable = [
+        'relation_id',
+        'driver_id',
+        'driver_assist_id',
+        'bus_id',
+        'start_at'
+    ];
+
+    public function ticket() : HasMany {
+        return $this->hasMany(ticket::class, "schedule_id", "id");
+    }
+
     public function relation() : BelongsTo{
         return $this->belongsTo(relation::class, "relation_id", "id");
     }
@@ -29,6 +41,6 @@ class Schedule extends Model
     }
 
     public function bus(): BelongsTo{
-        return $this-> belongsTo(bus::class, "id", "bus_id  ");
+        return $this-> belongsTo(bus::class, "bus_id", "id");
     }
 }

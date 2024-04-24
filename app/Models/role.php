@@ -5,14 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Role extends Model {
-    protected $table = "tickets";
+    protected $table = "roles";
     protected $primaryKey = "id";
     protected $typeKey = "int";
     public $incrementing = true;
 
-    public function employess() : BelongsTo{
-        return $this->belongsTo(employee::class, "role_id", "id");
+    protected $fillable = [
+        'name',
+        'description',
+    ];
+
+    public function employess() : HasMany{
+        return $this->hasMany(employee::class, "role_id", "id");
     }
 }

@@ -9,11 +9,17 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class relation extends Model
 {
-    protected $table = "tickets";
+    protected $table = "relations";
     protected $primaryKey = "id";
     protected $typeKey = "int";
     public $timestamps = true;
     public $incrementing = true;
+
+    protected $fillable = [
+        'from_id',
+        'destination_id',
+        'price',
+    ];
 
     public function cityFrom() : BelongsTo {
         return $this->belongsTo(city::class, "from_id", "id");

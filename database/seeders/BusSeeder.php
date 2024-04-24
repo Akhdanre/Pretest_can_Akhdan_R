@@ -19,7 +19,7 @@ class BusSeeder extends Seeder
             'capacity' => 45,
         ]);
 
-        Bus::create([
+        bus::create([
             'plat_no' => 'B 5678 CD',
             'type' => 'Mercedes',
             'capacity' => 60,
